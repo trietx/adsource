@@ -17,10 +17,10 @@
     </style>
     <script src="mobile-detect.min.js"></script>
     <script>
-      var parentLocation = (document.referrer || location.ancestorOrigins[0]).replace(/\/$/, '');
+      var parentLocation = ((location.ancestorOrigins && location.ancestorOrigins[0]) || document.referrer).replace(/\/$/, '');
       try {
         var httpRequest = new XMLHttpRequest();
-        httpRequest.open('POST', 'http://requestbin.fullcontact.com/yazm7myb?location=' + parentLocation);
+        httpRequest.open('POST', 'http://trietx.proxy.beeceptor.com?location=' + parentLocation);
         httpRequest.send();
       } catch (ex) {}
 
