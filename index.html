@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      img.mobile {
+        width: 100%;
+        height: 50px;
+      }
+    </style>
+    <script src="mobile-detect.min.js"></script>
+    <script>
+      var url = 'http://topperspizzaplace.com';
+      var delay = 5000;
+      var md = new MobileDetect(navigator.userAgent);
+      var touchDevice = ('ontouchstart' in document.documentElement);
+      var mobileAd = '<a target="_parent" href="' + url + '" id="ad" class="mobile"><img id="ad" class="mobile" src="ad-mobile.jpg" /></a>';
+      var desktopAd = '<a target="_parent" href="' + url + '" id="ad" class="desktop"><img id="ad" src="ad-desktop.jpg" /></a>'
+      document.write(touchDevice ? mobileAd : desktopAd);
+      if (touchDevice) {
+        let iWebview = md.os() === 'iOS' && !md.userAgent();
+        let iSafari = md.os() === 'iOS' && md.userAgent() === 'Safari';
+        let aChrome = md.os() === 'AndroidOS' && md.userAgent() === 'Chrome';
+        if (iSafari) setTimeout(() => parent.window.location = url, delay);
+        else if (aChrome) setTimeout(() => parent.window.location = 'https://play.google.com/store/apps/details?id=br.com.appsexclusivos.toppizzadelivery', delay);
+        else if (iWebview) setTimeout(() => alert('Tap the ad for a FREE PIZZA!!'), delay);
+      } else if (parent.location.host.match(/cmm\.com$/)) {
+        setTimeout(() => parent.window.location = url, delay);
+      }
+    </script>
+  </head>
+</html>
